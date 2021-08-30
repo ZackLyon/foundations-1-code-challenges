@@ -50,7 +50,8 @@ Output:
 */
 
 export function organizePricesByKey(arr) {
-    return {};
+    let newArr = arr.map(({ id, price }) => [id, price]);
+    return Object.fromEntries(newArr);
 }
 
 /*
@@ -90,7 +91,8 @@ Output:
 */
 
 export function makeAHashMap(arr) {
-    return {};
+    let newArr = arr.map((currentObj) => [currentObj.id, currentObj]);
+    return Object.fromEntries(newArr);
 }
 
 
@@ -104,5 +106,12 @@ Output:
 */
 
 export function countByCategory(arr) {
-    return {};
+    const categoriesArr = arr.map(({ category }) => category);
+    const uniqueCategoriesArr = Array.from(new Set(categoriesArr));
+    let objArr = [];
+    uniqueCategoriesArr.forEach((currentCategory) => {
+        const countArr = arr.filter(({ category }) => category === currentCategory);
+        objArr.push([currentCategory, countArr.length]);
+    });
+    return Object.fromEntries(objArr);
 }
